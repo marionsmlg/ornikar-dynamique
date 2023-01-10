@@ -29,8 +29,8 @@
       </a>
       <nav class="nav_content">
         {% for navlink in navlinks %}
-  <a class="{{navlink.class}}" href="{{navlink.href}}">{{navlink.title}}</a>
-{% endfor %}
+        <a class="{{navlink.class}}" href="{{navlink.href}}">{{navlink.title}}</a>
+        {% endfor %}
         <a href="/member/login.html"><button class="primary_button">Connexion</button></a>
       </nav>
       <div class="burger_button">
