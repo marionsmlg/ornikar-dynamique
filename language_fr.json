@@ -1,0 +1,15 @@
+{"navlinks" : [
+    {"class": "nav_link",
+      "title": "Code de la route",
+      "href": "https://www.ornikar.com/code"
+    },
+    {"class": "nav_link",
+        "title": "Permis de conduire",
+        "href": "https://www.ornikar.com/permis"
+    },
+      
+    {"class": "nav_link",
+    "title" : "Assurance auto",
+    "href" : "https://www.ornikar.com/assurance-auto"
+}
+    ]}
