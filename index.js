@@ -5,7 +5,7 @@ nunjucks.configure({ autoescape: true });
 let outString = nunjucks.render("index.njk", language);
 fs.writeFile("index.html", outString, (err) => {
   if (err) {
-    throw new err(`erreur`);
+    throw new err(`error`);
   }
   console.log(`index.html file created`);
 });
