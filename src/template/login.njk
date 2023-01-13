@@ -1,0 +1,74 @@
+<body>
+  <div class="title_container">
+    <p class="subscribe_title">{{title}}</p>
+    <div class="login_container">
+      ou <a class="links_style" href="/login.html">je me connecte</a>
+    </div>
+  </div>
+  <div class="subscribe_container">
+    <form>
+      <div class="label_input_container">
+        <label for="first_name">Prénom</label>
+        <input class="input" id="first_name" />
+      </div>
+      <div class="label_input_container">
+        <label for="last_name">Nom</label>
+        <input class="input" id="last_name" />
+      </div>
+      <div class="label_input_container">
+        <label for="date_of_birth">Date de naissance</label>
+        <input class="input" id="date_of_birth" type="date" />
+      </div>
+      <div class="label_input_container">
+        <label for="zipcode"> Code postal</label>
+        <input class="input" id="zipcode" type="zipcode" placeholder="06800" />
+      </div>
+      <div class="label_input_container">
+        <label for="email">Email</label>
+        <input class="input" id="email" type="email" placeholder="polo@degun.com" />
+      </div>
+      <div class="label_input_container">
+        <label for="password">Mot de passe</label>
+        <input class="input" id="password" type="password" />
+      </div>
+      <div class="password_criteria">
+        <div class="input_requirement">
+          <span class="input_tag">12 caractères minimum</span>
+        </div>
+        <div class="input_requirement">
+          <span class="input_tag">1 majuscule</span>
+        </div>
+        <div class="input_requirement">
+          <span class="input_tag">1 minuscule</span>
+        </div>
+        <div class="input_requirement">
+          <span class="input_tag">1 chiffre</span>
+        </div>
+        <div class="input_requirement">
+          <span class="input_tag">1 caractère spécial</span>
+        </div>
+      </div>
+
+      <div class="label_checkbox_container">
+        <input class="checkbox" id="offer" type="checkbox" />
+        <label for="offer">J'accepte de recevoir des offres commerciales de la part
+          d'Ornikar.</label>
+      </div>
+      <div class="label_checkbox_container">
+        <input class="checkbox" id="cgu" type="checkbox" />
+        <label for="cgu">J'accepte et je comprends les
+          <a class="links_style" href="https://www.ornikar.com/a-propos/conditions-generales-d-utilisation">conditions
+            générales d'utilisation</a>
+          et la
+          <a class="links_style" href="https://www.ornikar.com/a-propos/charte-de-confidentialite">politique de
+            confidentialité d'Ornikar.</a></label>
+      </div>
+      <div class="txt_small">
+        Vos données personnelles sont traitées par Ornikar à des fins de création de votre compte personnel.
+      </div>
+      <div class="subscribe_button_container">
+        <button class="primary_button" type="submit">Je m'inscris</button>
+      </div>
+  </div>
+  </form>
+</body>

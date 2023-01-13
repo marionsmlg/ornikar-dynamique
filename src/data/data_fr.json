@@ -1,0 +1,92 @@
+{
+  "navlinks": [
+    {
+      "title": "Code de la route",
+      "href": "https://www.ornikar.com/code"
+    },
+    {
+      "title": "Permis de conduire",
+      "href": "https://www.ornikar.com/permis"
+    },
+
+    {
+      "title": "Assurance auto",
+      "href": "https://www.ornikar.com/assurance-auto"
+    }
+  ],
+
+  "section1": {
+    "title": "Dès le premier jour, nous vous aidons à obtenir",
+    "highlightTitle": "votre code de la route.",
+    "picture": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/da1b2b54540a4df022ccd4581ef06961.svg",
+    "content": "Afin de faciliter votre expérience, nous vous permettons d’avancer à votre rythme sur la voie de la réussite.",
+    "sec1List": [
+      {
+        "content": "Démarrez votre formation",
+        "highlightContent": "où vous le souhaitez."
+      },
+      {
+        "content": "Profitez de 2 000 questions d’entraînement en ligne",
+        "highlightContent": "à l'heure que vous voulez."
+      },
+      {
+        "content": "Réalisez de belles économies avec votre code",
+        "highlightContent": "à moins de 5 €"
+      }
+    ],
+    "button": {
+      "href": "https://www.ornikar.com/code",
+      "title": "J'obtiens mon code"
+    },
+
+    "linkList": [
+      {
+        "href": "https://www.ornikar.com/code/cours",
+        "title": "Cours du code"
+      },
+      {
+        "href": "https://www.ornikar.com/code/gratuit",
+        "title": "Code de la route gratuit"
+      },
+      {
+        "href": "https://www.ornikar.com/code/cours/panneaux",
+        "title": "Panneaux du code de la route"
+      },
+      {
+        "href": "https://www.ornikar.com/code/examen/apres/resultat-code",
+        "title": "Panneaux du code de la route"
+      },
+      {
+        "href": "https://www.ornikar.com/code/examen",
+        "title": "Examen du code de la route"
+      },
+      {
+        "href": "https://www.ornikar.com/code/examen/passer",
+        "title": "Passer le code"
+      },
+      {
+        "href": "https://www.ornikar.com/code/examen/etapes-inscription/candidat-libre",
+        "title": "Passer le code en candidat libre"
+      }
+    ]
+  },
+
+  "section2": {
+    "title": "\"On se fait une petite série ensemble ?\"",
+    "content": "Vous avez des questions qui restent sans réponse ou besoin de motivation afin de poursuivre vos révisions ? J’anime chaque semaine trois lives interactifs lors desquels nous pouvons échanger et vous préparer à l’examen du code de la route.",
+    "figure": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/d328b3c3a52824e673ad2601bb8ab51e.jpg",
+    "figcaption": {
+      "name": "Cassandra",
+      "profession": ", Animatrice du Live code"
+    }
+  },
+
+  "interlude1": {
+    "title": "Vous venez d'obtenir votre code et vous avez moins de 18 ans ? Découvrez",
+    "titleHighlight": "notre offre conduite accompagnée.",
+    "button": {
+      "href": "https://www.ornikar.com/conduite-accompagnee",
+      "title": "Je fais la conduite accompagnée"
+    }
+  }
+}

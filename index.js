@@ -1,13 +1,22 @@
 const nunjucks = require("nunjucks");
-const language = require("./language_fr.json");
+const data = require("./src/data/data_fr.json");
 const fs = require("fs");
 nunjucks.configure({ autoescape: true });
-let outString = nunjucks.render("index.njk", language);
-fs.writeFile("index.html", outString, (err) => {
+let templateMenu = nunjucks.render("./src/template/index.njk", data);
+fs.writeFile("./dist/index.html", templateMenu, (err) => {
   if (err) {
-    throw new err(`error`);
+    throw err;
   }
   console.log(`index.html file created`);
+});
+
+const dataLogin = require("./src/data/data_login.json");
+let templateLogin = nunjucks.render("./src/template/login.njk", dataLogin);
+fs.writeFile("./dist/login.html", templateLogin, (err) => {
+  if (err) {
+    throw err;
+  }
+  console.log(`login.html file created`);
 });
 
 // fs.writeFileSync("index.html", outString);
