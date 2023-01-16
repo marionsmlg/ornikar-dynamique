@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "generate": "node src/index.js"
+  },
   "dependencies": {
     "nunjucks": "^3.2.3"
   }

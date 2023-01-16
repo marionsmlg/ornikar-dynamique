@@ -1,0 +1,42 @@
+{
+  "subscribeTitle": "Je m'inscris gratuitement",
+  "transitionTxt": "ou",
+  "loginTitle": "je me connecte",
+  "hrefLogin": "/login.html",
+
+  "label": {
+    "name": "Prénom",
+    "lastname": "Nom",
+    "dateOfBirth": "Date de naissance",
+    "zipcode": "Code postal",
+    "email": "Email",
+    "password": "Mot de passe"
+  },
+
+  "placeholder": {
+    "zipcode": "06740",
+    "email": "marion@smlg.com"
+  },
+
+  "inputRequirement": [
+    "12 caractères minimum",
+    "1 majuscule",
+    "1 minuscule",
+    "1 chiffre",
+    "1 caractère spécial"
+  ],
+
+  "checkboxLabel": {
+    "offers": "J'accepte de recevoir des offres commerciales de la part d'Ornikar.",
+    "intro": "J'accepte et je comprends les",
+    "linkTitleCgu": "conditions générales d'utilisation",
+    "hrefCgu": "https://www.ornikar.com/a-propos/conditions-generales-d-utilisation",
+    "transitionTxt": "et la",
+    "linkTitleConfidentialityChart": "politique de confidentialité d'Ornikar.",
+    "hrefConfidentialityChart": "https://www.ornikar.com/a-propos/charte-de-confidentialite"
+  },
+
+  "personalData": "Vos données personnelles sont traitées par Ornikar à des fins de création de votre compte personnel.",
+
+  "subscribeButtonContent": "Je m'inscris"
+}
