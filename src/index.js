@@ -21,15 +21,6 @@ fs.rm("./dist", { recursive: true, force: true }, (err) => {
       }
       console.log(`index.html file created`);
     });
-
-    let templateLogin = nunjucks.render("./src/template/login.njk", dataLogin);
-    fs.writeFile("./dist/login.html", templateLogin, (err) => {
-      if (err) {
-        throw err;
-      }
-      console.log(`login.html file created`);
-    });
-
     fs.copyFile("./src/css/index.css", "./dist/index.css", (err) => {
       if (err) throw err;
       console.log("Le fichier index.css a été copié!");
@@ -38,9 +29,25 @@ fs.rm("./dist", { recursive: true, force: true }, (err) => {
       if (err) throw err;
       console.log("Le fichier global.css a été copié!");
     });
-    fs.copyFile("./src/css/login.css", "./dist/login.css", (err) => {
-      if (err) throw err;
-      console.log("Le fichier login.css a été copié!");
+
+    fs.mkdir("./dist/member", function (error) {
+      if (error) {
+        throw error;
+      }
+      let templateLogin = nunjucks.render(
+        "./src/template/login.njk",
+        dataLogin
+      );
+      fs.writeFile("./dist/member/login.html", templateLogin, (err) => {
+        if (err) {
+          throw err;
+        }
+        console.log(`login.html file created`);
+      });
+      fs.copyFile("./src/css/login.css", "./dist/member/login.css", (err) => {
+        if (err) throw err;
+        console.log("Le fichier login.css a été copié!");
+      });
     });
   });
 });
