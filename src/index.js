@@ -6,6 +6,7 @@ const dataLogin = require("./data/login.json");
 nunjucks.configure({ autoescape: true });
 
 let templateMenu = nunjucks.render("./src/template/index.njk", data);
+let templateLogin = nunjucks.render("./src/template/login.njk", dataLogin);
 
 fs.rm("./dist", { recursive: true, force: true }, (err) => {
   if (err) {
@@ -34,10 +35,7 @@ fs.rm("./dist", { recursive: true, force: true }, (err) => {
       if (error) {
         throw error;
       }
-      let templateLogin = nunjucks.render(
-        "./src/template/login.njk",
-        dataLogin
-      );
+
       fs.writeFile("./dist/member/login.html", templateLogin, (err) => {
         if (err) {
           throw err;

@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "generate": "node src/index.js"
+    "generate": "node src/index.js",
+    "dev": "http-server ./dist"
   },
   "dependencies": {
+    "http-server": "^14.1.1",
     "nunjucks": "^3.2.3"
   }
 }

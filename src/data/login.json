@@ -1,4 +1,19 @@
 {
+  "navlinks": [
+    {
+      "title": "Code de la route",
+      "href": "https://www.ornikar.com/code"
+    },
+    {
+      "title": "Permis de conduire",
+      "href": "https://www.ornikar.com/permis"
+    },
+
+    {
+      "title": "Assurance auto",
+      "href": "https://www.ornikar.com/assurance-auto"
+    }
+  ],
   "subscribeTitle": "Je m'inscris gratuitement",
   "transitionTxt": "ou",
   "loginTitle": "je me connecte",
