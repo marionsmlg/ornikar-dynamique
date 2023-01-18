@@ -17,7 +17,7 @@
   "subscribeTitle": "Je m'inscris gratuitement",
   "transitionTxt": "ou",
   "loginTitle": "je me connecte",
-  "hrefLogin": "/login.html",
+  "hrefLogin": "./login.html",
 
   "label": {
     "name": "Prénom",
