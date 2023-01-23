@@ -14,7 +14,7 @@
     </h1>
     <div class="imagecoderoute">
       <img
-        src="{{section1.picture}}" />
+        src="{{section1.picture}}" alt="Code de la route" />
     </div>
     <div class="sec1_content">
       {{section1.content}}
@@ -27,7 +27,7 @@
         {% endfor %}
       </ul>
 
-      <a href="{{section1.button.href}}"><button class="sec1_button">{{section1.button.title}}</button></a>
+      <a href="{{section1.button.href}}"><button id="codeRoute" class="sec1_button">{{section1.button.title}}</button></a>
 
       <div class="sec1_links">
         En savoir plus:
@@ -67,7 +67,7 @@
       </h2>
 
       <div class="inter1_box_button">
-        <a href="{{interlude1.button.href}}"><button class="inter1_button">
+        <a href="{{interlude1.button.href}}"><button id="conduiteAccompagnee" class="inter1_button">
             {{interlude1.button.title}}<svg class="inter1_icon_button" viewBox="0 0 20 20">
               <path fill="currentColor"
                 d="M15.586 9H2a1 1 0 100 2h13.586l-4.293 4.293a1 1 0 001.414 1.414l6-6a1 1 0 000-1.414l-6-6a1 1 0 00-1.414 1.414L15.586 9z">

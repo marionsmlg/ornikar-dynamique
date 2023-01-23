@@ -13,10 +13,10 @@
         {% for navlink in navlinks %}
         <a class="nav_link" href="{{navlink.href}}">{{navlink.title}}</a>
         {% endfor %}
-        <a href="/member/login.html"><button class="primary_button">Connexion</button></a>
+        <a href="/member/login.html"><button id="connexionButton"class="primary_button">Connexion</button></a>
       </nav>
       <div class="burger_button">
-        <button class="nav_burger_button">
+        <button id="burgerButton" class="nav_burger_button">
           <svg class="burger" viewBox="0 0 20 20">
             <path
               d="M1 11h18a1 1 0 000-2H1a1 1 0 100 2zm0-6h18a1 1 0 000-2H1a1 1 0 100 2zm0 12h18a1 1 0 000-2H1a1 1 0 000 2z"
