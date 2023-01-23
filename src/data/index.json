@@ -1,4 +1,6 @@
 {
+  "cssGlobal": "global.css",
+  "cssFile": "index.css",
   "navlinks": [
     {
       "title": "Code de la route",
