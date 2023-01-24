@@ -1,8 +1,8 @@
 {
   "titlePage": "Ornikar : L'auto-école et l'assurance auto nouvelle génération",
-  "openGraphTitle": "Passez dès aujourdʼhui votre examen du code de la route avec Ornikar",
+  "openGraphTitle": "Ornikar",
   "openGraphImg": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/52ed29e6b160248ffa0ec4ec9d22dc15.jpg",
-  "openGraphDescription": "man driving",
+  "openGraphDescription": "Passez dès aujourdʼhui votre examen du code de la route avec Ornikar",
   "openGraphUrl": "https://ornikar-dynamique.vercel.app/",
   "cssGlobal": "global.css",
   "cssFile": "index.css",

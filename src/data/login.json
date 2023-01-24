@@ -2,7 +2,7 @@
   "titlePage": "Connexion - Ornikar",
   "openGraphTitle": "Connexion",
   "openGraphImg": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/52ed29e6b160248ffa0ec4ec9d22dc15.jpg",
-  "openGraphDescription": "man driving",
+  "openGraphDescription": "Connectez-vous à Ornikar pour vous entraîner au code de la route ou réserver des heures de conduite.",
   "openGraphUrl": "https://ornikar-dynamique.vercel.app/member/login.html",
   "cssGlobal": "/global.css",
   "cssFile": "./login.css",
