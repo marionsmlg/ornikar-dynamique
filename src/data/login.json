@@ -1,4 +1,5 @@
 {
+  "titlePage": "Connexion - Ornikar",
   "cssGlobal": "/global.css",
   "cssFile": "./login.css",
   "navlinks": [
