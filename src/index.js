@@ -5,6 +5,7 @@ const dataLogin = require("./data/login.json");
 const { minify } = require("html-minifier-terser");
 const fsp = require("fs/promises");
 const cleanCSS = require("clean-css");
+// const { minify } = require("terser");
 
 nunjucks.configure({ autoescape: true });
 
@@ -16,14 +17,8 @@ const minifyOptionsHtml = {
   collapseWhitespace: true,
   removeComments: true,
 };
-const minifyOptionsCss = {
-  removeAttributeQuotes: true,
-  collapseWhitespace: true,
-  removeComments: true,
-  minifyCss: true,
-};
-const templateMenuMinified = minify(templateMenu, minifyOptionsHtml);
 
+const templateMenuMinified = minify(templateMenu, minifyOptionsHtml);
 const templateLoginMinified = minify(templateLogin, minifyOptionsHtml);
 
 fsp
@@ -84,6 +79,23 @@ fsp
                 );
               });
           });
+
+        // fsp
+        //   .readFile("./src/js/global.js", "utf8")
+        //   .catch((err) => {
+        //     throw err;
+        //   })
+        //   .then((data) => {
+        //     let minifiedGlobalJS = minify(data);
+        //     fsp
+        //       .writeFile("./dist/global.js", minifiedGlobalJS.data)
+        //       .catch((err) => {
+        //         throw err;
+        //       })
+        //       .then(() => {
+        //         console.log("The global.js file has been minified and copied!");
+        //       });
+        //   });
 
         fsp
           .copyFile("./src/js/global.js", "./dist/global.js")
