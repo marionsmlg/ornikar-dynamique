@@ -1,81 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% include "./global.njk" %}
+  {% include "./global.njk" %}
 
-<body>
+  <body>
 
-{% include "./navbar.njk" %}
+    {% include "./navbar.njk" %}
 
-   <section class="section1">
-    <h1 class="sec1_title">
-      {{section1.title}}
-      <span class="titleblue">{{section1.highlightTitle}}</span>
-    </h1>
-    <div class="imagecoderoute">
-      <img
-        src="{{section1.picture}}" width="640" height="360" alt="Code de la route" />
-    </div>
-    <div class="sec1_content">
-      {{section1.content}}
-      <ul class="sec1_list">
-        {% for element in section1.list %}
-        <li>
-          {{element.content}}
-          <span class="txtgras">{{element.highlightContent}}</span>
-        </li>
-        {% endfor %}
-      </ul>
+    <section class="section1">
+      <h1 class="sec1_title">
+        {{section1.title}}
+        <span class="titleblue">{{section1.highlightTitle}}</span>
+      </h1>
+      <div class="imagecoderoute">
+        <img
+        src="{{section1.picture}}" width="640" height="360" alt="Code de la route"/>
+      </div>
+      <div class="sec1_content">
+        {{section1.content}}
+        <ul class="sec1_list">
+          {% for element in section1.list %}
+            <li>
+              {{element.content}}
+              <span class="txtgras">{{element.highlightContent}}</span>
+            </li>
+          {% endfor %}
+        </ul>
 
-      <a href="{{section1.button.href}}"><button id="codeRoute" class="sec1_button">{{section1.button.title}}</button></a>
+        <a href="{{section1.button.href}}">
+          <button id="codeRoute" class="sec1_button">{{section1.button.title}}</button>
+        </a>
 
-      <div class="sec1_links">
+        <div class="sec1_links">
         En savoir plus:
         {% for link in section1.linkList %}
-        <span class="linkdot"><a class="links_style" href="{{link.href}}">{{link.title}}</a></span>
-        {% endfor %}
+            <span class="linkdot">
+              <a class="links_style" href="{{link.href}}">{{link.title}}</a>
+            </span>
+          {% endfor %}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <section class="section2">
-    <div class="sec2_content">
-      <div class="sec2_QuoteContainer">
-        <blockquote>
-          <p class="sec2_title">{{section2.title}}</p>
-          <p class="sec2_txt">
-            {{section2.content}}
-          </p>
-        </blockquote>
-        <figcaption>
-          <span class="txtgras">{{section2.figcaption.name}}</span>{{section2.figcaption.profession}}
-        </figcaption>
-      </div>
-      <div class="imgCassandra">
-        <img
+      <div class="sec2_content">
+        <div class="sec2_QuoteContainer">
+          <blockquote>
+            <p class="sec2_title">{{section2.title}}</p>
+            <p class="sec2_txt">
+              {{section2.content}}
+            </p>
+          </blockquote>
+          <figcaption>
+            <span class="txtgras">{{section2.figcaption.name}}</span>{{section2.figcaption.profession}}
+          </figcaption>
+        </div>
+        <div class="imgCassandra">
+          <img
           src="{{section2.figure}}"
-          alt="Cassandra" class="ImgQuoteCassandra" />
+          alt="Cassandra" class="ImgQuoteCassandra"/>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <div class="interlude1">
-    <div class="interlude1_inner">
-      <h2 class="inter1_txt">
-       {{interlude1.title}}
-        <span class="titleblue">{{interlude1.titleHighlight}}</span>
-      </h2>
+      <div class="interlude1_inner">
+        <h2 class="inter1_txt">
+          {{interlude1.title}}
+          <span class="titleblue">{{interlude1.titleHighlight}}</span>
+        </h2>
 
-      <div class="inter1_box_button">
-        <a href="{{interlude1.button.href}}"><button id="conduiteAccompagnee" class="inter1_button">
-            {{interlude1.button.title}}<svg class="inter1_icon_button" viewBox="0 0 20 20">
-              <path fill="currentColor"
-                d="M15.586 9H2a1 1 0 100 2h13.586l-4.293 4.293a1 1 0 001.414 1.414l6-6a1 1 0 000-1.414l-6-6a1 1 0 00-1.414 1.414L15.586 9z">
-              </path>
-            </svg></button></a>
+        <div class="inter1_box_button">
+          <a href="{{interlude1.button.href}}">
+            <button id="conduiteAccompagnee" class="inter1_button">
+              {{interlude1.button.title}}
+              <svg class="inter1_icon_button" viewBox="0 0 20 20">
+                <path fill="currentColor"
+                d="M15.586 9H2a1 1 0 100 2h13.586l-4.293 4.293a1 1 0 001.414 1.414l6-6a1 1 0 000-1.414l-6-6a1 1 0 00-1.414 1.414L15.586 9z"></path>
+              </svg>
+            </button>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 
 </html>

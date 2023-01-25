@@ -4,6 +4,7 @@ const fs = require("fs");
 const dataLogin = require("./data/login.json");
 const { minify } = require("html-minifier-terser");
 const fsp = require("fs/promises");
+const cleanCSS = require("clean-css");
 
 nunjucks.configure({ autoescape: true });
 
@@ -25,70 +26,108 @@ const templateMenuMinified = minify(templateMenu, minifyOptionsHtml);
 
 const templateLoginMinified = minify(templateLogin, minifyOptionsHtml);
 
-fs.rm("./dist", { recursive: true, force: true }, (err) => {
-  if (err) {
+fsp
+  .rm("./dist", { recursive: true, force: true })
+  .catch((err) => {
     throw err;
-  }
-  fs.mkdir("./dist", function (error) {
-    if (error) {
-      throw error;
-    }
-    templateMenuMinified.then(function (value) {
-      fs.writeFile("./dist/index.html", value, (err) => {
-        if (err) {
-          throw err;
-        }
-        console.log(`index.html file created`);
-      });
-    });
-
-    // fs.writeFileSync(
-    //   "./dist/index.css",
-    //   minify(fs.readFileSync("./src/css/index.css", "utf8"), minifyOptionsCss),
-    //   "utf8"
-    // );
-
-    fs.copyFile("./src/css/index.css", "./dist/index.css", (err) => {
-      if (err) throw err;
-      console.log("Le fichier index.css a été copié!");
-    });
-
-    fs.copyFile("./src/css/global.css", "./dist/global.css", (err) => {
-      if (err) throw err;
-      console.log("Le fichier global.css a été copié!");
-    });
-    fs.copyFile("./src/js/global.js", "./dist/global.js", (err) => {
-      if (err) throw err;
-      console.log("Le fichier global.js a été copié!");
-    });
-
-    fs.mkdir("./dist/member", function (error) {
-      if (error) {
-        throw error;
-      }
-      templateLoginMinified.then(function (value) {
-        fs.writeFile("./dist/member/login.html", value, (err) => {
-          if (err) {
-            throw err;
-          }
-          console.log(`login.html file created`);
+  })
+  .then(() => {
+    fsp
+      .mkdir("./dist")
+      .catch((err) => {
+        throw err;
+      })
+      .then(() => {
+        templateMenuMinified.then(function (value) {
+          fsp
+            .writeFile("./dist/index.html", value)
+            .catch((err) => {
+              throw err;
+            })
+            .then(() => {
+              console.log(`index.html file created`);
+            });
         });
-      });
 
-      fs.copyFile("./src/css/login.css", "./dist/member/login.css", (err) => {
-        if (err) throw err;
-        console.log("Le fichier login.css a été copié!");
+        fsp
+          .readFile("./src/css/index.css", "utf8")
+          .catch((err) => {
+            throw err;
+          })
+          .then((data) => {
+            let minifiedIndexCSS = new cleanCSS().minify(data).styles;
+            fsp
+              .writeFile("./dist/index.css", minifiedIndexCSS)
+              .catch((err) => {
+                throw err;
+              })
+              .then(() => {
+                console.log("The index.css file has been minified and copied!");
+              });
+          });
+
+        fsp
+          .readFile("./src/css/global.css", "utf8")
+          .catch((err) => {
+            throw err;
+          })
+          .then((data) => {
+            let minifiedGlobalCSS = new cleanCSS().minify(data).styles;
+            fsp
+              .writeFile("./dist/global.css", minifiedGlobalCSS)
+              .catch((err) => {
+                throw err;
+              })
+              .then(() => {
+                console.log(
+                  "The global.css file has been minified and copied!"
+                );
+              });
+          });
+
+        fsp
+          .copyFile("./src/js/global.js", "./dist/global.js")
+          .catch((err) => {
+            throw err;
+          })
+          .then(() => {
+            console.log("Le fichier global.js a été copié!");
+          });
+        fsp
+          .mkdir("./dist/member")
+          .catch((err) => {
+            throw err;
+          })
+          .then(() => {
+            templateLoginMinified.then(function (value) {
+              fsp
+                .writeFile("./dist/member/login.html", value)
+                .catch((err) => {
+                  throw err;
+                })
+                .then(() => {
+                  console.log("login.html file created");
+                });
+            });
+
+            fsp
+              .readFile("./src/css/login.css", "utf8")
+              .catch((err) => {
+                throw err;
+              })
+              .then((data) => {
+                let minifiedLoginCSS = new cleanCSS().minify(data).styles;
+                fsp
+                  .writeFile("./dist/member/login.css", minifiedLoginCSS)
+                  .catch((err) => {
+                    throw err;
+                  })
+                  .then(() => {
+                    console.log(
+                      "The login.css file has been minified and copied!"
+                    );
+                  });
+              });
+          });
       });
-    });
   });
-});
-
-// fs.writeFileSync("index.html", outString);
-// console.log("index.html file created");
-
-// const nunjucks = require("nunjucks");
-// nunjucks.configure({ autoescape: true });
-// let helloStr = nunjucks.renderString("Hello {{username}}", {
-//   username: "Marion",
-// });
-// console.log(helloStr);

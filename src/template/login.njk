@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% include "./global.njk" %}
+  {% include "./global.njk" %}
 
-{% include "./navbar.njk" %}
+  {% include "./navbar.njk" %}
 
-<body>
-  <div class="title_container">
-    <p class="subscribe_title">{{subscribeTitle}}</p>
-    <div class="login_container">
-      {{transitionTxt}} <a class="links_style" href="{{hrefLogin}}">{{loginTitle}}</a>
+  <body>
+    <div class="title_container">
+      <p class="subscribe_title">{{subscribeTitle}}</p>
+      <div class="login_container">
+        {{transitionTxt}}
+        <a class="links_style" href="{{hrefLogin}}">{{loginTitle}}</a>
+      </div>
     </div>
-  </div>
-  <div class="subscribe_container">
-<form>
-      <div class="label_input_container">
-        <label for="first_name">{{label.name}}</label>
-        <input class="input" id="first_name" />
-      </div>
-      <div class="label_input_container">
-        <label for="last_name">{{label.lastname}}</label>
-        <input class="input" id="last_name" />
-      </div>
-      <div class="label_input_container">
-        <label for="date_of_birth">{{label.dateOfBirth}}</label>
-        <input class="input" id="date_of_birth" type="date" />
-      </div>
-      <div class="label_input_container">
-        <label for="zipcode">{{label.zipcode}}</label>
-        <input class="input" id="zipcode" type="zipcode" placeholder="{{placeholder.zipcode}}" />
-      </div>
-      <div class="label_input_container">
-        <label for="email">{{label.email}}</label>
-        <input class="input" id="email" type="email" placeholder="{{placeholder.email}}" />
-      </div>
-      <div class="label_input_container">
-        <label for="password">{{label.password}}</label>
-        <input class="input" id="password" type="password" />
-      </div>
-
-      <div class="password_criteria">
-        {% for requirement in inputRequirement %}
-        <div class="input_requirement">
-          <span class="input_tag">{{requirement}}</span>
+    <div class="subscribe_container">
+      <form>
+        <div class="label_input_container">
+          <label for="first_name">{{label.name}}</label>
+          <input class="input" id="first_name"/>
         </div>
-        {% endfor %}
-      </div>
+        <div class="label_input_container">
+          <label for="last_name">{{label.lastname}}</label>
+          <input class="input" id="last_name"/>
+        </div>
+        <div class="label_input_container">
+          <label for="date_of_birth">{{label.dateOfBirth}}</label>
+          <input class="input" id="date_of_birth" type="date"/>
+        </div>
+        <div class="label_input_container">
+          <label for="zipcode">{{label.zipcode}}</label>
+          <input class="input" id="zipcode" type="zipcode" placeholder="{{placeholder.zipcode}}"/>
+        </div>
+        <div class="label_input_container">
+          <label for="email">{{label.email}}</label>
+          <input class="input" id="email" type="email" placeholder="{{placeholder.email}}"/>
+        </div>
+        <div class="label_input_container">
+          <label for="password">{{label.password}}</label>
+          <input class="input" id="password" type="password"/>
+        </div>
 
-      <div class="label_checkbox_container">
-        <input class="checkbox" id="offer" type="checkbox" />
-        <label for="offer">{{checkboxLabel.offers}}</label>
+        <div class="password_criteria">
+          {% for requirement in inputRequirement %}
+            <div class="input_requirement">
+              <span class="input_tag">{{requirement}}</span>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="label_checkbox_container">
+          <input class="checkbox" id="offer" type="checkbox"/>
+          <label for="offer">{{checkboxLabel.offers}}</label>
+        </div>
+        <div class="label_checkbox_container">
+          <input class="checkbox" id="cgu" type="checkbox"/>
+          <label for="cgu">{{checkboxLabel.intro}}
+            <a class="links_style" href="{{checkboxLabel.hrefCgu}}">{{checkboxLabel.linkTitleCgu}}</a>
+            {{checkboxLabel.transitionTxt}}
+            <a class="links_style" href="{{checkboxLabel.hrefConfidentialityChart}}">{{checkboxLabel.linkTitleConfidentialityChart}}</a>
+          </label>
+        </div>
+        <div class="txt_small">
+          {{personalData}}
+        </div>
+        <div class="subscribe_button_container">
+          <button class="primary_button" type="submit">{{subscribeButtonContent}}</button>
+        </div>
       </div>
-      <div class="label_checkbox_container">
-        <input class="checkbox" id="cgu" type="checkbox" />
-        <label for="cgu">{{checkboxLabel.intro}}
-          <a class="links_style" href="{{checkboxLabel.hrefCgu}}">{{checkboxLabel.linkTitleCgu}}</a>
-          {{checkboxLabel.transitionTxt}}
-          <a class="links_style" href="{{checkboxLabel.hrefConfidentialityChart}}">{{checkboxLabel.linkTitleConfidentialityChart}}</a></label>
-      </div>
-      <div class="txt_small">
-        {{personalData}}
-      </div>
-      <div class="subscribe_button_container">
-        <button class="primary_button" type="submit">{{subscribeButtonContent}}</button>
-      </div>
-  </div>
-  </form>
-</body>
+    </form>
+  </body>
