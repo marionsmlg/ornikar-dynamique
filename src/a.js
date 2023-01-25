@@ -1,16 +1,5 @@
 const { minify } = require("html-minifier-terser");
+const fsp = require("fs/promises");
+let cssFile = fsp.readFile("./src/css/index.css", "utf-8").then(data);
 
-const result = minify('<p title="blah" id="moo">foo</p>', {
-  removeAttributeQuotes: true,
-});
-const cssDataIndex = require("./css/index.css");
-// const cssIndexMinified = minify(cssDataIndex, {
-//   collapseWhitespace: true,
-//   removeComments: true,
-//   minifyCSS: true,
-// });
-
-// cssIndexMinified.then(function (value) {
-//   console.log(value);
-// });
-console.log(cssDataIndex);
+console.log(cssFile);
