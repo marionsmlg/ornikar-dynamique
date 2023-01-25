@@ -20,6 +20,11 @@ const templateLoginMinified = minify(templateLogin, {
   collapseWhitespace: true,
   removeComments: true,
 });
+const cssIndexMinified = minify(cssDataIndex, {
+  removeAttributeQuotes: true,
+  collapseWhitespace: true,
+  removeComments: true,
+});
 
 fs.rm("./dist", { recursive: true, force: true }, (err) => {
   if (err) {
