@@ -6,6 +6,7 @@
   "openGraphUrl": "https://ornikar-dynamique.vercel.app/member/login.html",
   "cssGlobal": "/global.css",
   "cssFile": "./login.css",
+  "jsFile": "/global.js",
   "navlinks": [
     {
       "title": "Code de la route",
