@@ -2,12 +2,6 @@ body {
   margin: 0;
   font-family: quicksand;
 }
-/* .header{
-  position :fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-} */
 
 .navbar {
   background-color: #ffede6;
@@ -63,7 +57,7 @@ body {
   background-color: #fff;
   position:absolute;
   width: 100%;
-  display: flex;
+  display: none;
   flex-direction: column;
 
 }
@@ -121,6 +115,8 @@ body {
   cursor: pointer;
 }
 
+
+
 .nav_content {
   display: none;
 }
@@ -143,6 +139,13 @@ body {
   width: 20px;
   height: 20px;
   display: flex;
+  justify-content: center;
+}
+
+.cross{
+  width: 20px;
+  height: 20px;
+  display: none;
   justify-content: center;
 }
 

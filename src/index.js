@@ -5,7 +5,7 @@ const dataLogin = require("./data/login.json");
 const { minify } = require("html-minifier-terser");
 const fsp = require("fs/promises");
 const cleanCSS = require("clean-css");
-// const { minify } = require("terser");
+const terser = require("terser");
 
 nunjucks.configure({ autoescape: true });
 
