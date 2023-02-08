@@ -1,12 +1,10 @@
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("hello");
-  let menuIsOpen = false;
-
-  document.getElementById("burgerButton").addEventListener("click", () => {
-    if (menuIsOpen) {
-      closeMenu();
-    } else {
+  const burgerButton = document.getElementById("burgerButton");
+  burgerButton.addEventListener("click", () => {
+    if (burgerButton.dataset.menuIsOpen === "false") {
       openMenu();
+    } else {
+      closeMenu();
     }
   });
 
@@ -15,7 +13,7 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("burger").style.display = "flex";
     document.getElementById("burgerButton").style.backgroundColor = "#4c34e0";
     document.getElementById("cross").style.display = "none";
-    menuIsOpen = false;
+    burgerButton.dataset.menuIsOpen = "false";
   }
 
   function openMenu() {
@@ -23,6 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("burger").style.display = "none";
     document.getElementById("burgerButton").style.backgroundColor = "#f2e1da";
     document.getElementById("cross").style.display = "flex";
-    menuIsOpen = true;
+    burgerButton.dataset.menuIsOpen = "true";
   }
 });
