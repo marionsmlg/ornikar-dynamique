@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "generate": "node src/index.js",
+    "generate": "node src/build.js",
     "dev": "http-server -c-1 ./dist"
   },
   "dependencies": {

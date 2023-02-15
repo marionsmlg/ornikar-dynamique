@@ -11,27 +11,48 @@ const args = process.argv.slice(2);
 const isDev = args[0] === "dev";
 
 async function handleHtml(njkPath, jsonPath, dest) {
-  const dataJson = await fsp.readFile(jsonPath);
-  const dataJsonParse = JSON.parse(dataJson);
-  const dataHtml = nunjucks.render(njkPath, dataJsonParse);
+  const dataStr = await fsp.readFile(jsonPath);
+  const data = JSON.parse(dataStr);
+  const html = nunjucks.render(njkPath, data);
   if (isDev) {
-    await fsp.writeFile(dest, dataHtml);
-    console.log(`${path.basename(dest)} file created`);
+    await fsp.writeFile(dest, html);
+    console.info(`${path.basename(dest)} file created`);
   } else {
-    const minifedDataHtml = await minify(dataHtml, {
+    const minifedHtml = await minify(html, {
       removeAttributeQuotes: true,
       collapseWhitespace: true,
       removeComments: true,
     });
-    await fsp.writeFile(dest, minifedDataHtml);
-    console.log(`${path.basename(dest)} file created and minified`);
+    await fsp.writeFile(dest, minifedHtml);
+    console.info(`${path.basename(dest)} file created and minified`);
+  }
+}
+
+async function handleIndexHtml(njkPath, jsonIndexPath, jsonArticlesPath, dest) {
+  const indexDataStr = await fsp.readFile(jsonIndexPath);
+  const indexData = JSON.parse(indexDataStr);
+  const articlesDataStr = await fsp.readFile(jsonArticlesPath);
+  const articles = JSON.parse(articlesDataStr);
+  const highlightArticles = articles.slice(0, 3);
+  indexData.highlightArticles = highlightArticles;
+  const indexHtml = nunjucks.render(njkPath, indexData);
+  if (isDev) {
+    await fsp.writeFile(dest, indexHtml);
+    console.info(`${path.basename(dest)} file created`);
+  } else {
+    const minifedHtml = await minify(indexHtml, {
+      removeAttributeQuotes: true,
+      collapseWhitespace: true,
+      removeComments: true,
+    });
+    await fsp.writeFile(dest, minifedHtml);
+    console.info(`${path.basename(dest)} file created and minified`);
   }
 }
 
 async function handleArticles(njkPath, jsonPath) {
   const dataJson = await fsp.readFile(jsonPath);
-  const dataJsonParse = JSON.parse(dataJson);
-  const articles = dataJsonParse.articles;
+  const articles = JSON.parse(dataJson);
 
   for (const article of articles) {
     const dest = `./dist/blog/${slugify(article.title)}${article.id}.html`;
@@ -45,6 +66,21 @@ async function handleArticles(njkPath, jsonPath) {
       cssGlobal: "/global.css",
       cssFile: "./articles.css",
       jsFile: "/global.js",
+      navlinks: [
+        {
+          title: "Code de la route",
+          href: "https://www.ornikar.com/code",
+        },
+        {
+          title: "Permis de conduire",
+          href: "https://www.ornikar.com/permis",
+        },
+
+        {
+          title: "Assurance auto",
+          href: "https://www.ornikar.com/assurance-auto",
+        },
+      ],
       article,
     };
 
@@ -56,24 +92,24 @@ async function handleArticles(njkPath, jsonPath) {
 async function handleCss(src, dest) {
   if (isDev) {
     await fsp.copyFile(src, dest);
-    console.log(`${path.basename(src)} file has been copied`);
+    console.info(`${path.basename(src)} file has been copied`);
   } else {
     const data = await fsp.readFile(src, "utf8");
     const minifiedData = await new cleanCSS().minify(data);
     await fsp.writeFile(dest, minifiedData.styles);
-    console.log(`${path.basename(src)} file has been minified`);
+    console.info(`${path.basename(src)} file has been minified`);
   }
 }
 
 async function handleJs(src, dest) {
   if (isDev) {
     await fsp.copyFile(src, dest);
-    console.log(`${path.basename(src)} file has been copied`);
+    console.info(`${path.basename(src)} file has been copied`);
   } else {
     const data = await fsp.readFile(src, "utf8");
     const minifiedData = await minifyterser(data);
     await fsp.writeFile(dest, minifiedData.code);
-    console.log(`${path.basename(src)} file has been minified`);
+    console.info(`${path.basename(src)} file has been minified`);
   }
 }
 
@@ -83,9 +119,10 @@ async function main() {
   await Promise.all([fsp.mkdir("./dist/member"), fsp.mkdir("./dist/blog")]);
 
   await Promise.all([
-    handleHtml(
+    handleIndexHtml(
       "./src/template/index.njk",
       "./src/data/index.json",
+      "./src/data/articles.json",
       "./dist/index.html"
     ),
     handleCss("./src/css/index.css", "./dist/index.css"),

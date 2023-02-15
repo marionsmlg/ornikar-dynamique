@@ -323,7 +323,7 @@ figcaption {
   .section_articles {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
   }
   .article_container {
     width: 40%;
@@ -335,6 +335,8 @@ figcaption {
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 .article_text {
