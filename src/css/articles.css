@@ -9,7 +9,7 @@
 .article_title {
   font-size: 5rem;
   font-weight: bold;
-  margin-bottom: 40px;
+  margin-bottom: 90px;
 }
 .content_picture_container {
   width: 85%;
@@ -20,7 +20,9 @@
 .article_description {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .img_container {

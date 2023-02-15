@@ -333,6 +333,8 @@ figcaption {
 .article_container {
   margin-bottom: 10px;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .article_text {
@@ -349,6 +351,11 @@ figcaption {
 .article_title {
   font-weight: bold;
   font-size: 0.9rem;
+}
+
+.article_picture_container {
+  display: flex;
+  justify-content: center;
 }
 
 .article_picture {
