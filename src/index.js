@@ -41,7 +41,7 @@ async function handleArticles(njkPath, jsonPath) {
       openGraphTitle: article.title,
       openGraphImg: article.img,
       openGraphDescription: article.description,
-      openGraphUrl: "https://ornikar-dynamique.vercel.app/",
+      openGraphUrl: `/blog/${slugify(article.title)}${article.id}.html`,
       cssGlobal: "/global.css",
       cssFile: "./articles.css",
       jsFile: "/global.js",
