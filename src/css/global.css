@@ -53,20 +53,19 @@ body {
   text-decoration: underline;
 }
 
-.small_nav{
+.small_nav {
   background-color: #fff;
-  position:absolute;
+  position: absolute;
   width: 100%;
   display: none;
   flex-direction: column;
-
 }
 
 .nav_link_small {
   color: black;
   font-weight: 700;
   text-decoration: none;
-  padding : 44px 10px 17px;
+  padding: 44px 10px 17px;
   text-align: center;
 }
 
@@ -88,7 +87,7 @@ body {
   width: auto;
 }
 
-.secondary_button{
+.secondary_button {
   border: 0;
   line-height: 2.5;
   font-family: quicksand;
@@ -101,10 +100,10 @@ body {
   width: 100%;
 }
 
-.button_container{
+.button_container {
   padding: 30px 20px;
-  border-top : 1px solid #e5e5e5;
-  margin-top :38px;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 38px;
 }
 
 .nav_burger_button {
@@ -114,8 +113,6 @@ body {
   background-color: #4c34e0;
   cursor: pointer;
 }
-
-
 
 .nav_content {
   display: none;
@@ -130,8 +127,8 @@ body {
     display: none;
   }
 
-  .small_nav{
-    display:none;
+  .small_nav {
+    display: none;
   }
 }
 
@@ -142,7 +139,7 @@ body {
   justify-content: center;
 }
 
-.cross{
+.cross {
   width: 20px;
   height: 20px;
   display: none;

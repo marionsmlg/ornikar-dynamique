@@ -95,5 +95,25 @@
       "href": "https://www.ornikar.com/conduite-accompagnee",
       "title": "Je fais la conduite accompagnée"
     }
-  }
+  },
+  "sectionArticles": [
+    {
+      "href": "/blog/apprenez-a-conduire-des-39-90-e1v9525z79n.html",
+      "img": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/9270d7037cd72f52b5f729b693119a57.jpg",
+      "category": "Conduite",
+      "title": "Apprenez à conduire dès 39,90 €"
+    },
+    {
+      "href": "/blog/votre-permis-de-conduire-en-mieux-des-799-e18s2ukq9ln.html",
+      "img": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/8e72cf0030bf9971eac8d5a703058559.jpg",
+      "category": "Permis de conduire",
+      "title": "Votre permis de conduire en mieux dès 799 €"
+    },
+    {
+      "href": "/blog/obtenez-votre-permis-en-conduite-accompagnee-des-1099-e1v9525z79y.html",
+      "img": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/dfa66320d77893dae39ff948270ff4f5.jpg",
+      "category": "Conduite accompagnée",
+      "title": "Obtenez votre permis en conduite accompagnée dès 1099 €"
+    }
+  ]
 }

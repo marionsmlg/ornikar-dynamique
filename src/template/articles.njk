@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% include "./_global.njk" %}
+
+    <body>
+
+        {% include "./_navbar.njk" %}
+
+        <section class="article">
+            <div class="article_category">
+                {{article.category}}
+            </div>
+            <h1 class="article_title">
+                {{article.title}}
+            </h1>
+            <div class="content_picture_container">
+                <p class="article_description">
+                    {{article.description}}
+                </p>
+
+                <div class="img_container">
+                    <img class="article_picture" width="500" height="300" src="{{article.img}}"/>
+                </div>
+
+                <p class="article_content">
+                    {{article.content}}
+                </p>
+
+            </div>
+
+        </section>
+
+    </body>
+</html>

@@ -309,3 +309,54 @@ figcaption {
   height: 20px;
   margin-left: 10px;
 }
+
+.section_articles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 40px;
+  padding-right: 40px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .section_articles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .article_container {
+    width: 40%;
+  }
+}
+
+.article_container {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.article_text {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+}
+
+.article_category {
+  color: #4c34e0;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.article_title {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.article_picture {
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.link_article {
+  text-decoration: none;
+}

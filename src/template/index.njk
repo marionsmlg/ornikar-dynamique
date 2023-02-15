@@ -83,5 +83,24 @@
         </div>
       </div>
     </div>
+
+    <div class="section_articles">
+
+      {% for article in sectionArticles %}
+        <div class="article_container">
+          <a class="link_article" href="{{article.href}}">
+            <div class="article_picture_container">
+              <img class="article_picture" width="400" height="200" src="{{article.img}}" alt="voiture-auto-ecole"/>
+            </div>
+            <div class="article_text">
+              <h2 class="article_category">{{article.category}}</h2>
+              <h3 class="article_title">{{article.title}}</h3>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+
+    </div>
+
   </body>
 </html>

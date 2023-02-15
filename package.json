@@ -1,11 +1,15 @@
 {
+  "type": "module",
   "scripts": {
     "generate": "node src/index.js",
     "dev": "http-server -c-1 ./dist"
   },
   "dependencies": {
+    "@ngneat/falso": "^6.4.0",
+    "@sindresorhus/slugify": "^2.2.0",
     "html-minifier-terser": "^7.1.0",
     "http-server": "^14.1.1",
+    "nanoid": "^4.0.1",
     "nunjucks": "^3.2.3",
     "terser": "^5.16.1"
   },

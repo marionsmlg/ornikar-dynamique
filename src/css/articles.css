@@ -1,0 +1,34 @@
+.article {
+  padding: 100px 200px;
+}
+.article_category {
+  color: #4c34e0;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.article_title {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+.content_picture_container {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article_description {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.img_container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.article_picture {
+  width: 100%;
+  height: auto;
+}
