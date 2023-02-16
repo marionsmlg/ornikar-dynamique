@@ -10,10 +10,17 @@ import slugify from "@sindresorhus/slugify";
 const args = process.argv.slice(2);
 const isDev = args[0] === "dev";
 
+// async function readJSON(jsonPath) {
+//   const dataStr = await fsp.readFile(jsonPath);
+//   const data = JSON.parse(dataStr);
+//   return data;
+// }
+
 async function handleHtml(njkPath, jsonPath, dest) {
   const dataStr = await fsp.readFile(jsonPath);
   const data = JSON.parse(dataStr);
   const html = nunjucks.render(njkPath, data);
+  // await fsp.mkdir(dest, { recursive: true });
   if (isDev) {
     await fsp.writeFile(dest, html);
     console.info(`${path.basename(dest)} file created`);
@@ -62,7 +69,7 @@ async function handleArticles(njkPath, jsonPath) {
       openGraphTitle: article.title,
       openGraphImg: article.img,
       openGraphDescription: article.description,
-      openGraphUrl: `/blog/${slugify(article.title)}${article.id}.html`,
+      openGraphUrl: `/blog/${slugify(article.title)}-${article.id}.html`,
       cssGlobal: "/global.css",
       cssFile: "./articles.css",
       jsFile: "/global.js",
