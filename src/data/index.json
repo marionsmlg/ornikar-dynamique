@@ -7,21 +7,7 @@
   "cssGlobal": "global.css",
   "cssFile": "index.css",
   "jsFile": "global.js",
-  "navlinks": [
-    {
-      "title": "Code de la route",
-      "href": "https://www.ornikar.com/code"
-    },
-    {
-      "title": "Permis de conduire",
-      "href": "https://www.ornikar.com/permis"
-    },
 
-    {
-      "title": "Assurance auto",
-      "href": "https://www.ornikar.com/assurance-auto"
-    }
-  ],
   "section1": {
     "title": "Dès le premier jour, nous vous aidons à obtenir",
     "highlightTitle": "votre code de la route.",

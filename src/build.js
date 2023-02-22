@@ -10,17 +10,30 @@ import slugify from "@sindresorhus/slugify";
 const args = process.argv.slice(2);
 const isDev = args[0] === "dev";
 
-// async function readJSON(jsonPath) {
-//   const dataStr = await fsp.readFile(jsonPath);
-//   const data = JSON.parse(dataStr);
-//   return data;
-// }
+async function pathExists(path) {
+  try {
+    await fsp.access(path);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
 
-async function handleHtml(njkPath, jsonPath, dest) {
+async function readJSON(jsonPath) {
   const dataStr = await fsp.readFile(jsonPath);
   const data = JSON.parse(dataStr);
+  return data;
+}
+
+async function handleHtml(njkPath, jsonPath, jsonGlobalPath, dest) {
+  const data = await readJSON(jsonPath);
+  const dataGlobal = await readJSON(jsonGlobalPath);
+  const dataNavbar = dataGlobal.navlinks;
+  data.navlinks = dataNavbar;
   const html = nunjucks.render(njkPath, data);
-  // await fsp.mkdir(dest, { recursive: true });
+  if (!(await pathExists(path.dirname(dest)))) {
+    await fsp.mkdir(path.dirname(dest)), { recursive: true };
+  }
   if (isDev) {
     await fsp.writeFile(dest, html);
     console.info(`${path.basename(dest)} file created`);
@@ -35,14 +48,24 @@ async function handleHtml(njkPath, jsonPath, dest) {
   }
 }
 
-async function handleIndexHtml(njkPath, jsonIndexPath, jsonArticlesPath, dest) {
-  const indexDataStr = await fsp.readFile(jsonIndexPath);
-  const indexData = JSON.parse(indexDataStr);
-  const articlesDataStr = await fsp.readFile(jsonArticlesPath);
-  const articles = JSON.parse(articlesDataStr);
+async function handleIndexHtml(
+  njkPath,
+  jsonIndexPath,
+  jsonArticlesPath,
+  jsonGlobalPath,
+  dest
+) {
+  const indexData = await readJSON(jsonIndexPath);
+  const articles = await readJSON(jsonArticlesPath);
+  const dataGlobal = await readJSON(jsonGlobalPath);
+  const dataNavbar = dataGlobal.navlinks;
   const highlightArticles = articles.slice(0, 3);
   indexData.highlightArticles = highlightArticles;
+  indexData.navlinks = dataNavbar;
   const indexHtml = nunjucks.render(njkPath, indexData);
+  if (!(await pathExists(path.dirname(dest)))) {
+    await fsp.mkdir(path.dirname(dest)), { recursive: true };
+  }
   if (isDev) {
     await fsp.writeFile(dest, indexHtml);
     console.info(`${path.basename(dest)} file created`);
@@ -57,13 +80,16 @@ async function handleIndexHtml(njkPath, jsonIndexPath, jsonArticlesPath, dest) {
   }
 }
 
-async function handleArticles(njkPath, jsonPath) {
-  const dataJson = await fsp.readFile(jsonPath);
-  const articles = JSON.parse(dataJson);
+async function handleArticles(njkPath, jsonPath, jsonGlobalPath) {
+  const articles = await readJSON(jsonPath);
+  const dataGlobal = await readJSON(jsonGlobalPath);
+  const dataNavbar = dataGlobal.navlinks;
 
   for (const article of articles) {
     const dest = `./dist/blog/${slugify(article.title)}${article.id}.html`;
-
+    if (!(await pathExists(path.dirname(dest)))) {
+      await fsp.mkdir(path.dirname(dest)), { recursive: true };
+    }
     const data = {
       titlePage: article.title,
       openGraphTitle: article.title,
@@ -73,23 +99,9 @@ async function handleArticles(njkPath, jsonPath) {
       cssGlobal: "/global.css",
       cssFile: "./articles.css",
       jsFile: "/global.js",
-      navlinks: [
-        {
-          title: "Code de la route",
-          href: "https://www.ornikar.com/code",
-        },
-        {
-          title: "Permis de conduire",
-          href: "https://www.ornikar.com/permis",
-        },
-
-        {
-          title: "Assurance auto",
-          href: "https://www.ornikar.com/assurance-auto",
-        },
-      ],
       article,
     };
+    data.navlinks = dataNavbar;
 
     const html = nunjucks.render(njkPath, data);
     await fsp.writeFile(dest, html);
@@ -97,6 +109,9 @@ async function handleArticles(njkPath, jsonPath) {
 }
 
 async function handleCss(src, dest) {
+  if (!(await pathExists(path.dirname(dest)))) {
+    await fsp.mkdir(path.dirname(dest)), { recursive: true };
+  }
   if (isDev) {
     await fsp.copyFile(src, dest);
     console.info(`${path.basename(src)} file has been copied`);
@@ -109,6 +124,9 @@ async function handleCss(src, dest) {
 }
 
 async function handleJs(src, dest) {
+  if (!(await pathExists(path.dirname(dest)))) {
+    await fsp.mkdir(path.dirname(dest)), { recursive: true };
+  }
   if (isDev) {
     await fsp.copyFile(src, dest);
     console.info(`${path.basename(src)} file has been copied`);
@@ -123,13 +141,13 @@ async function handleJs(src, dest) {
 async function main() {
   await fsp.rm("./dist", { recursive: true, force: true });
   await fsp.mkdir("./dist");
-  await Promise.all([fsp.mkdir("./dist/member"), fsp.mkdir("./dist/blog")]);
 
   await Promise.all([
     handleIndexHtml(
       "./src/template/index.njk",
       "./src/data/index.json",
       "./src/data/articles.json",
+      "./src/data/global.json",
       "./dist/index.html"
     ),
     handleCss("./src/css/index.css", "./dist/index.css"),
@@ -141,11 +159,16 @@ async function main() {
     handleHtml(
       "./src/template/login.njk",
       "./src/data/login.json",
+      "./src/data/global.json",
       "./dist/member/login.html"
     ),
     handleCss("./src/css/login.css", "./dist/member/login.css"),
 
-    handleArticles("./src/template/articles.njk", "./src/data/articles.json"),
+    handleArticles(
+      "./src/template/articles.njk",
+      "./src/data/articles.json",
+      "./src/data/global.json"
+    ),
     handleCss("./src/css/articles.css", "./dist/blog/articles.css"),
   ]);
 }

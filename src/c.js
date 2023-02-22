@@ -7,10 +7,11 @@ import cleanCSS from "clean-css";
 import { minify as minifyterser } from "terser";
 import slugify from "@sindresorhus/slugify";
 
-async function readJSON(jsonPath) {
-  const dataStr = await fsp.readFile(jsonPath);
-  const data = JSON.parse(dataStr);
-  return data;
+import fs from "fs";
+
+async function dir() {
+  const files = await fsp.readdir("./dist");
+  return files;
 }
 
-readJSON("./src/data/login.json");
+console.log(await dir());
