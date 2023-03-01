@@ -13,5 +13,8 @@
       "title": "Assurance auto",
       "href": "https://www.ornikar.com/assurance-auto"
     }
-  ]
+  ],
+
+  "cssGlobal": "/global.css",
+  "jsGlobal": "/global.js"
 }

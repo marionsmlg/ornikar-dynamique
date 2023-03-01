@@ -4,9 +4,7 @@
   "openGraphImg": "https://assets.ornikar.com/ornikar-fr-prod-main-website/_next/static/assets/52ed29e6b160248ffa0ec4ec9d22dc15.jpg",
   "openGraphDescription": "Passez dès aujourdʼhui votre examen du code de la route avec Ornikar",
   "openGraphUrl": "https://ornikar-dynamique.vercel.app/",
-  "cssGlobal": "global.css",
   "cssFile": "index.css",
-  "jsFile": "global.js",
 
   "section1": {
     "title": "Dès le premier jour, nous vous aidons à obtenir",
