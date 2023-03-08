@@ -1,32 +1,42 @@
-import http from "http";
+import fsp from "fs/promises";
 import path from "path";
-import fs from "fs/promises";
+import nunjucks from "nunjucks";
+nunjucks.configure({ autoescape: true });
+import { minify } from "html-minifier-terser";
+import cleanCSS from "clean-css";
+import { minify as minifyterser } from "terser";
+import slugify from "@sindresorhus/slugify";
 
-// const server = http.createServer((req, res) => {
-//   const filename = path.parse(req.url).name; // extract filename without extension
-//   const filePath = `./dist/${filename}.html`; // create file path with .html extension
-//   fs.readFile(filePath, (err, data) => {
-//     if (err) {
-//       res.writeHead(404, { "Content-Type": "text/html" });
-//       res.write("<h1>404 Not Found</h1>");
-//       return res.end();
-//     }
-//     res.writeHead(200, { "Content-Type": "text/html" });
-//     res.write(data);
-//     return res.end();
-//   });
-// });
+async function mergeJsonFiles(jsonPaths) {
+  let mergedData = {};
 
-// server.listen(4000, () => {
-//   console.log("Server running on port 4000");
-// });
-async function isDir(filePath) {
-  try {
-    const stat = await fs.stat(filePath);
-    return stat.isDirectory();
-  } catch (error) {
-    return false;
+  for (const jsonPath of jsonPaths) {
+    const data = await readJSON(jsonPath);
+    mergedData = { ...mergedData, ...data };
   }
+
+  return mergedData;
 }
 
-console.log(await isDir("/blog"));
+async function getData(jsonPath, jsonGlobalPath) {
+  const njkData = await readJSON(jsonPath);
+  const dataGlobal = await readJSON(jsonGlobalPath);
+  const data = Object.assign({}, njkData, dataGlobal);
+  return data;
+}
+
+// console.log(
+//   await mergeJsonFiles(["./src/data/login.json", "./src/data/global.json"])
+// );
+console.log(await getData("./src/data/login.json", "./src/data/global.json"));
+
+async function readJSON(jsonPath) {
+  const dataStr = await fsp.readFile(jsonPath);
+  const data = JSON.parse(dataStr);
+  return data;
+}
+
+function createArticleSlug(title, id) {
+  const slug = `${slugify(title)}-${id}`;
+  return slug;
+}

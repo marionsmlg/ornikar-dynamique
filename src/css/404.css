@@ -1,0 +1,50 @@
+.container_404 {
+  margin: 30px auto 80px;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .container_404 {
+    margin-top: 50px;
+    margin-bottom: 160px;
+  }
+}
+
+.stop_img_container {
+  height: 200px;
+  margin-bottom: 30px;
+}
+
+.stop_img {
+  display: block;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.txt_404 {
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.description_404 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.button_container_404 {
+  text-align: center;
+}
+
+.button_404 {
+  border: 0;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-family: quicksand;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}

@@ -11,28 +11,31 @@ const server = http.createServer(async (request, response) => {
     if (await isDir(filePath)) {
       filePath += "/index";
     }
-    if (extname !== ".html" && extname !== ".css" && extname !== ".js") {
+    if (extname === "") {
       filePath += ".html";
       if ((await pathExists(filePath)) && (await isFile(filePath))) {
-        let content = await fs.readFile(filePath, "utf-8");
+        const content = await fs.readFile(filePath, "utf-8");
         response.setHeader("Content-type", await getContentType(request.url));
         response.end(content);
       } else {
         response.statusCode = 404;
-        response.end("<h1>Page not found</h1>");
+        const content = await fs.readFile("./dist/404.html", "utf-8");
+        response.setHeader("Content-type", await getContentType(request.url));
+        response.end(content);
       }
     } else if (
-      ((await pathExists(filePath)) &&
-        (await isFile(filePath)) &&
-        extname === ".css") ||
-      extname === ".js"
+      (await pathExists(filePath)) &&
+      (await isFile(filePath)) &&
+      extname !== ".html"
     ) {
-      let content = await fs.readFile(filePath, "utf-8");
+      const content = await fs.readFile(filePath, "utf-8");
       response.setHeader("Content-type", await getContentType(request.url));
       response.end(content);
     } else {
       response.statusCode = 404;
-      response.end("<h1>Page not found</h1>");
+      const content = await fs.readFile("./dist/404.html", "utf-8");
+      response.setHeader("Content-type", await getContentType(request.url));
+      response.end(content);
     }
   }
 });

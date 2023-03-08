@@ -21,13 +21,14 @@ function getRandomFromArr(arr) {
 const nanoid = customAlphabet("0123456789qwertyuiopasdfghjklzxcvbnm", 10);
 
 for (let i = 0; i <= 97; i++) {
+  const articleId = nanoid();
   const newArticle = {
-    id: nanoid(),
+    id: articleId,
     title: randPhrase(),
     description: randParagraph(),
     category: getRandomFromArr(arrOfCategories),
     content: randTextRange({ min: 2000, max: 3000 }),
-    img: "https://picsum.photos/300/200",
+    img: `https://picsum.photos/300/200?${articleId}`,
   };
   arrOfArticles.push(newArticle);
 }
