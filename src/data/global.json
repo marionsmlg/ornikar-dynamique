@@ -12,9 +12,68 @@
     {
       "title": "Assurance auto",
       "href": "https://www.ornikar.com/assurance-auto"
+    },
+    {
+      "title": "Blog",
+      "href": "/blog"
     }
   ],
 
   "cssGlobal": "/global.css",
-  "jsGlobal": "/global.js"
+  "jsGlobal": "/global.js",
+
+  "footerLinks": [
+    {
+      "href": "https://www.ornikar.com/actualites",
+      "title": "Actualités"
+    },
+    {
+      "href": "https://pro.ornikar.com/",
+      "title": "J'enseigne la conduite"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos",
+      "title": "À propos"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos/conditions-generales-d-utilisation",
+      "title": "CGU"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos/conditions-generales-de-vente",
+      "title": "CGV"
+    },
+    {
+      "href": "https://careers.ornikar.com/",
+      "title": "Carrières"
+    },
+    {
+      "href": "https://aide.ornikar.com/hc/fr",
+      "title": "FAQ"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos/contact",
+      "title": "Contact"
+    },
+    {
+      "href": "https://www.onroad.to/",
+      "title": "Onroad.to"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos/mentions-legales",
+      "title": "Mentions légales"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos/charte-de-confidentialite",
+      "title": "Charte de confidentialité"
+    },
+    {
+      "href": "https://www.ornikar.com/a-propos/cookies",
+      "title": "Politique de cookies"
+    },
+    {
+      "href": "",
+      "title": "Gérer mes cookies"
+    }
+  ]
 }
