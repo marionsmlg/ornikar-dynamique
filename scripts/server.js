@@ -2,9 +2,36 @@ import http from "http";
 import fs from "fs/promises";
 import path from "path";
 import mime from "mime-types";
+import https from "https";
 
 const server = http.createServer(async (request, response) => {
   if (request.method === "GET") {
+    const options = {
+      hostname: "admin-ornikar-production.up.railway.app",
+      path: "/api/articles",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const req = https.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => {
+        data += chunk;
+      });
+      res.on("end", () => {
+        const jsonData = JSON.parse(data);
+        const jsonDataStr = JSON.stringify(jsonData, null, "\t");
+        fs.writeFile("src/data/apiArticles.json", jsonDataStr);
+      });
+    });
+
+    req.on("error", (error) => {
+      console.error(error);
+    });
+
+    req.end();
+
     let url = request.url;
     const extname = path.extname(url);
     let filePath = `./dist${url}`;
@@ -35,8 +62,8 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(3000, () => {
-  console.log("http://localhost:3000");
+server.listen(3300, () => {
+  console.log("http://localhost:3300");
 });
 
 // function getContentType(reqUrl) {
