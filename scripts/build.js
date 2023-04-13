@@ -151,7 +151,10 @@ async function getDataHomePage() {
   const data = mergeData([dataIndex, dataGlobal]);
   const dataArticlesCategories = await getDataApi(optionsApiArticlesCategories);
   const articles = await getDataApi(optionsApiArticles);
-  const highlightArticles = articles.slice(0, 3);
+  const dataArticlesPublished = articles.filter(
+    (article) => article.status === "published"
+  );
+  const highlightArticles = dataArticlesPublished.slice(0, 3);
   data.highlightArticles = highlightArticles;
 
   for (const article of highlightArticles) {
@@ -173,10 +176,13 @@ async function getDataLogin() {
 async function getDataIndexArticles() {
   const dataGlobal = await getDataGlobal();
   const dataArticles = await getDataApi(optionsApiArticles);
+  const dataArticlesPublished = dataArticles.filter(
+    (article) => article.status === "published"
+  );
   const dataArticlesCategories = await getDataApi(optionsApiArticlesCategories);
-  dataGlobal.articles = dataArticles;
+  dataGlobal.articles = dataArticlesPublished;
   dataGlobal.cssFile = "/blog/indexArticles.css";
-  for (const article of dataArticles) {
+  for (const article of dataArticlesPublished) {
     const articleCategory = dataArticlesCategories.find(
       (category) => category.id === article.categoryId
     );
