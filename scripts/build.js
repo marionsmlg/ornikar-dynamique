@@ -6,15 +6,50 @@ import { minify } from "html-minifier-terser";
 import cleanCSS from "clean-css";
 import { minify as minifyterser } from "terser";
 import slugify from "@sindresorhus/slugify";
+import https from "https";
+
+let env = nunjucks.configure({
+  noCache: true,
+});
 
 const args = process.argv.slice(2);
 const isDev = args[0] === "dev";
 
+const optionsApiArticles = {
+  hostname: "admin-ornikar-production.up.railway.app",
+  path: "/api/articles",
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+const optionsApiArticlesCategories = {
+  hostname: "admin-ornikar-production.up.railway.app",
+  path: "/api/articles-categories",
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+const optionsApiHeader = {
+  hostname: "admin-ornikar-production.up.railway.app",
+  path: "/api/header",
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+const optionsApiFooter = {
+  hostname: "admin-ornikar-production.up.railway.app",
+  path: "/api/footer",
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
 const dataHomePage = await getDataHomePage();
-const dataLoginHtml = await mergeJsonFiles([
-  "./src/data/login.json",
-  "./src/data/global.json",
-]);
+const dataLoginHtml = await getDataLogin();
 const dataIndexArticles = await getDataIndexArticles();
 
 const data404 = await getData404();
@@ -93,46 +128,94 @@ async function mergeJsonFiles(arrOfjsonPaths) {
 
   return mergedData;
 }
+function mergeData(arrOfData) {
+  let mergedData = {};
+
+  for (const data of arrOfData) {
+    mergedData = { ...mergedData, ...data };
+  }
+
+  return mergedData;
+}
 
 async function getData404() {
-  const data = await readJSON("./src/data/global.json");
+  const data = await getDataGlobal();
   data.cssFile = "/404.css";
   data.titlePage = "Ornikar";
   return data;
 }
 
 async function getDataHomePage() {
-  const data = await mergeJsonFiles([
-    "./src/data/index.json",
-    "./src/data/global.json",
-  ]);
-
-  const articles = await readJSON("./src/data/articles.json");
+  const dataIndex = await readJSON("./src/data/index.json");
+  const dataGlobal = await getDataGlobal();
+  const data = mergeData([dataIndex, dataGlobal]);
+  const dataArticlesCategories = await getDataApi(optionsApiArticlesCategories);
+  const articles = await getDataApi(optionsApiArticles);
   const highlightArticles = articles.slice(0, 3);
   data.highlightArticles = highlightArticles;
 
   for (const article of highlightArticles) {
+    const articleCategory = dataArticlesCategories.find(
+      (category) => category.id === article.categoryId
+    );
     article.href = `/blog/${createArticleSlug(article.title, article.id)}`;
+    article.category = articleCategory.name;
   }
+  return data;
+}
+async function getDataLogin() {
+  const dataLogin = await readJSON("./src/data/login.json");
+  const dataGlobal = await getDataGlobal();
+  const data = mergeData([dataLogin, dataGlobal]);
   return data;
 }
 
 async function getDataIndexArticles() {
-  const data = await readJSON("./src/data/global.json");
-
-  const articles = await readJSON("./src/data/articles.json");
-  data.articles = articles;
-  data.cssFile = "/blog/indexArticles.css";
-
-  for (const article of articles) {
+  const dataGlobal = await getDataGlobal();
+  const dataArticles = await getDataApi(optionsApiArticles);
+  const dataArticlesCategories = await getDataApi(optionsApiArticlesCategories);
+  dataGlobal.articles = dataArticles;
+  dataGlobal.cssFile = "/blog/indexArticles.css";
+  for (const article of dataArticles) {
+    const articleCategory = dataArticlesCategories.find(
+      (category) => category.id === article.categoryId
+    );
     article.href = `/blog/${createArticleSlug(article.title, article.id)}`;
+    article.category = articleCategory.name;
   }
-  return data;
+  return dataGlobal;
+}
+async function getDataGlobal() {
+  const dataHeader = await getDataApi(optionsApiHeader);
+  const dataFooter = await getDataApi(optionsApiFooter);
+  const dataGlobal = mergeData([dataHeader, dataFooter]);
+  dataGlobal.cssGlobal = "/global.css";
+  dataGlobal.jsGlobal = "/global.js";
+  return dataGlobal;
+}
+
+async function getDataApi(options) {
+  return new Promise((resolve, reject) => {
+    const request = https.request(options, (response) => {
+      let data = "";
+      response.on("data", (chunk) => {
+        data += chunk;
+      });
+      response.on("end", () => {
+        const jsonData = JSON.parse(data);
+        resolve(jsonData);
+      });
+    });
+    request.on("error", (error) => {
+      reject(error);
+    });
+    request.end();
+  });
 }
 
 async function handleArticles(dest) {
-  const articles = await readJSON("./src/data/articles.json");
-  const dataGlobal = await readJSON("./src/data/global.json");
+  const articles = await getDataApi(optionsApiArticles);
+  const dataGlobal = await getDataGlobal();
 
   for (const article of articles) {
     const fileDest = `${dest}/${createArticleSlug(
