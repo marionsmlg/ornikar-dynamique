@@ -11,6 +11,7 @@ import https from "https";
 let env = nunjucks.configure({
   noCache: true,
 });
+const secret = "HaB>`[kP=3JNN),T";
 
 const args = process.argv.slice(2);
 const isDev = args[0] === "dev";
@@ -20,7 +21,7 @@ const optionsApiArticles = {
   path: "/api/articles",
   method: "GET",
   headers: {
-    "Content-Type": "application/json",
+    Authorization: secret,
   },
 };
 const optionsApiArticlesCategories = {
@@ -28,7 +29,7 @@ const optionsApiArticlesCategories = {
   path: "/api/articles-categories",
   method: "GET",
   headers: {
-    "Content-Type": "application/json",
+    Authorization: secret,
   },
 };
 const optionsApiHeader = {
@@ -36,7 +37,7 @@ const optionsApiHeader = {
   path: "/api/header",
   method: "GET",
   headers: {
-    "Content-Type": "application/json",
+    Authorization: secret,
   },
 };
 const optionsApiFooter = {
@@ -44,7 +45,7 @@ const optionsApiFooter = {
   path: "/api/footer",
   method: "GET",
   headers: {
-    "Content-Type": "application/json",
+    Authorization: secret,
   },
 };
 
