@@ -8,10 +8,12 @@
   "dependencies": {
     "@ngneat/falso": "^6.4.0",
     "@sindresorhus/slugify": "^2.2.0",
+    "dotenv": "^16.0.3",
     "html-minifier-terser": "^7.1.0",
     "http-server": "^14.1.1",
     "mime-types": "^2.1.35",
     "nanoid": "^4.0.1",
+    "node-fetch": "^3.3.1",
     "nunjucks": "^3.2.3",
     "terser": "^5.16.1"
   },

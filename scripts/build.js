@@ -7,21 +7,23 @@ import cleanCSS from "clean-css";
 import { minify as minifyterser } from "terser";
 import slugify from "@sindresorhus/slugify";
 import https from "https";
+import "dotenv/config";
+import fetch from "node-fetch";
 
 let env = nunjucks.configure({
   noCache: true,
 });
-const secret = "HaB>`[kP=3JNN),T";
 
 const args = process.argv.slice(2);
 const isDev = args[0] === "dev";
+const ORNIKAR_ADMIN_API_KEY = process.env.ORNIKAR_ADMIN_API_KEY;
 
 const optionsApiArticles = {
   hostname: "admin-ornikar-production.up.railway.app",
   path: "/api/articles",
   method: "GET",
   headers: {
-    Authorization: secret,
+    Authorization: ORNIKAR_ADMIN_API_KEY,
   },
 };
 const optionsApiArticlesCategories = {
@@ -29,7 +31,7 @@ const optionsApiArticlesCategories = {
   path: "/api/articles-categories",
   method: "GET",
   headers: {
-    Authorization: secret,
+    Authorization: ORNIKAR_ADMIN_API_KEY,
   },
 };
 const optionsApiHeader = {
@@ -37,7 +39,7 @@ const optionsApiHeader = {
   path: "/api/header",
   method: "GET",
   headers: {
-    Authorization: secret,
+    Authorization: ORNIKAR_ADMIN_API_KEY,
   },
 };
 const optionsApiFooter = {
@@ -45,7 +47,7 @@ const optionsApiFooter = {
   path: "/api/footer",
   method: "GET",
   headers: {
-    Authorization: secret,
+    Authorization: ORNIKAR_ADMIN_API_KEY,
   },
 };
 
@@ -150,8 +152,10 @@ async function getDataHomePage() {
   const dataIndex = await readJSON("./src/data/index.json");
   const dataGlobal = await getDataGlobal();
   const data = mergeData([dataIndex, dataGlobal]);
-  const dataArticlesCategories = await getDataApi(optionsApiArticlesCategories);
-  const articles = await getDataApi(optionsApiArticles);
+  const dataArticlesCategories = await fetchDataFromAPI(
+    optionsApiArticlesCategories
+  );
+  const articles = await fetchDataFromAPI(optionsApiArticles);
   const dataArticlesPublished = articles.filter(
     (article) => article.status === "published"
   );
@@ -176,11 +180,13 @@ async function getDataLogin() {
 
 async function getDataIndexArticles() {
   const dataGlobal = await getDataGlobal();
-  const dataArticles = await getDataApi(optionsApiArticles);
+  const dataArticles = await fetchDataFromAPI(optionsApiArticles);
   const dataArticlesPublished = dataArticles.filter(
     (article) => article.status === "published"
   );
-  const dataArticlesCategories = await getDataApi(optionsApiArticlesCategories);
+  const dataArticlesCategories = await fetchDataFromAPI(
+    optionsApiArticlesCategories
+  );
   dataGlobal.articles = dataArticlesPublished;
   dataGlobal.cssFile = "/blog/indexArticles.css";
   for (const article of dataArticlesPublished) {
@@ -193,15 +199,15 @@ async function getDataIndexArticles() {
   return dataGlobal;
 }
 async function getDataGlobal() {
-  const dataHeader = await getDataApi(optionsApiHeader);
-  const dataFooter = await getDataApi(optionsApiFooter);
+  const dataHeader = await fetchDataFromAPI(optionsApiHeader);
+  const dataFooter = await fetchDataFromAPI(optionsApiFooter);
   const dataGlobal = mergeData([dataHeader, dataFooter]);
   dataGlobal.cssGlobal = "/global.css";
   dataGlobal.jsGlobal = "/global.js";
   return dataGlobal;
 }
 
-async function getDataApi(options) {
+async function getDataAPI(options) {
   return new Promise((resolve, reject) => {
     const request = https.request(options, (response) => {
       let data = "";
@@ -220,8 +226,33 @@ async function getDataApi(options) {
   });
 }
 
+async function fetchDataFromAPI(options) {
+  const { hostname, path, method, headers } = options;
+
+  const requestOptions = {
+    method: method,
+    headers: headers,
+  };
+
+  const url = `https://${hostname}${path}`;
+  return fetch(url, requestOptions)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Erreur : " + response.status);
+      }
+    })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.error("Erreur lors de la récupération des données :", error);
+    });
+}
+
 async function handleArticles(dest) {
-  const articles = await getDataApi(optionsApiArticles);
+  const articles = await fetchDataFromAPI(optionsApiArticles);
   const dataGlobal = await getDataGlobal();
 
   for (const article of articles) {
